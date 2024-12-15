@@ -14,7 +14,7 @@ app.secret_key = os.urandom(24)  # Generates a random 24-byte key.
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Configure SQLite3 database
-DATABASE = 'birthdays.db'
+DATABASE = '../data/birthdays.db'
 
 
 def get_db():
