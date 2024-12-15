@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>Birthdays</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Birthdays</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- Add a Birthday Form -->
+        <div class="section">
+            <h2>Add a Birthday</h2>
+            <form action="/" method="post">
+                <input autocomplete="off" autofocus name="name" placeholder="Name" type="text">
+                <div id="date">
+                    <input autocomplete="off" name="day" placeholder="DD" type="number">
+                    <input autocomplete="off" name="month" placeholder="MM" type="number">
+                    <input autocomplete="off" type="text" name="year" placeholder="YYYY">
+                </div>
+                <button type="submit">Add Birthday</button>
+            </form>
+        </div>
+
+        <!-- Birthday Alert for Today -->
+        {% set birthdays_today = birthdays | selectattr("days_until_birthday", "equalto", 0) | list %}
+        {% if birthdays_today %}
+        <div class="section alert">
+            <h3>Today's Birthdays!</h3>
+            {% for birthday in birthdays_today %}
+            <p>🎉 <strong>{{ birthday.name }}</strong> is turning {{ birthday.age }} years old today! 🎂</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Table of Birthdays -->
+        <div class="section">
+            <h3>Arranged in order of the soonest upcoming birthdays</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Birthday</th>
+                        <th>Days until</th>
+                        <th>Current age</th>
+                        <th>Remove entry</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for birthday in birthdays %}
+                    <tr>
+                        <td>{{ birthday.name }}</td>
+                        <td>{{ birthday.day }}/{{ birthday.month }}/{{ birthday.year }}</td>
+                        <td>{{ birthday.days_until_birthday }} days</td>
+                        <td>{{ birthday.age }} years old</td>
+                        <td>
+                            <form action="/remove" method="post">
+                                <input type="hidden" name="id" value="{{ birthday.id }}">
+                                <button>Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>
