@@ -56,7 +56,7 @@ def index():
             flash("Name is required.")
             return redirect("/")
         elif invalid_year:
-            flash("Year must be a valid number between 1900 and the current year.")
+            flash("Year must be a valid number between 0 and the current year.")
             return redirect("/")
         elif invalid_month:
             flash("Month must be a valid number between 1 and 12.")
