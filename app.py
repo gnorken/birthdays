@@ -47,7 +47,7 @@ def index():
 
         # Validate input
         invalid_name = not name
-        invalid_year = not year.isdigit() or int(year) < 1900 or int(year) > this_year
+        invalid_year = not year.isdigit() or int(year) < 0 or int(year) > this_year
         invalid_month = not month.isdigit() or int(month) < 1 or int(month) > 12
         invalid_day = not day.isdigit() or int(day) < 1 or int(
             day) > 31  # Initial check for day (to ensure number is valid)
@@ -140,8 +140,15 @@ def index():
                 else:
                     raise  # Re-raise other invalid date errors
 
-            # Calculate the number of days until the next birthday
-            days_until_birthday = (next_birthday - current_date).days
+            # Calculate the difference in days
+            if current_date.day == birthday_dict["day"] and current_date.month == birthday_dict["month"]:
+                days_until_birthday = 0
+                birthday_dict["birthday_message"] = "🎉 TODAY IS THAT PERSON'S BIRTHDAY! 🎂"
+            else:
+                # Calculate days until the next birthday
+                days_until_birthday = (next_birthday - current_date).days + 1
+                # No message if it's not today
+                birthday_dict["birthday_message"] = None
 
             # Add the calculated days to the birthday data
             birthday_dict["days_until_birthday"] = days_until_birthday
