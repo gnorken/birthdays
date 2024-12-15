@@ -146,7 +146,7 @@ def index():
                 birthday_dict["birthday_message"] = "🎉 TODAY IS THAT PERSON'S BIRTHDAY! 🎂"
             else:
                 # Calculate days until the next birthday
-                days_until_birthday = (next_birthday - current_date).days
+                days_until_birthday = (next_birthday - current_date).days + 1
                 # No message if it's not today
                 birthday_dict["birthday_message"] = None
 
