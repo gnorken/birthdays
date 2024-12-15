@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Set the secret key for session management. Needed for flash messages
 app.secret_key = os.urandom(24)  # Generates a random 24-byte key.
 
-# Ensure templates are auto-reloaded
+# Ensure templates are auto-reloaded.
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 # Configure SQLite3 database
