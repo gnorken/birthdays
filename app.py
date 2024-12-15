@@ -140,8 +140,12 @@ def index():
                 else:
                     raise  # Re-raise other invalid date errors
 
+            # Calculate the number of days until the next birthday
+            days_until_birthday = (next_birthday - current_date).days
+
             # Add the calculated days to the birthday data
             birthday_dict["days_until_birthday"] = days_until_birthday
+
             # Adds the processed birthday entry, including calculated days until the next birthday, to the list of upcoming birthdays.
             upcoming_birthdays.append(birthday_dict)
 
